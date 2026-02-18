@@ -23,6 +23,26 @@ sahim-django-common
 
 ## 🚀 Usage
 
+Add the app to your Django project's `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "sahim_django_common",
+    # ...
+]
+```
+
+Or with the full app config:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "sahim_django_common.apps.SahimDjangoCommonConfig",
+    # ...
+]
+```
+
 After installation, follow the documentation for the specific utilities you need. Usage details will depend on which modules you use.
 
 *(Documentation for individual utilities will be added here or in the docs as the package grows.)*

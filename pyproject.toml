@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sahim-django-common"
+version = "0.1.0"
+description = "Django utilities and common components"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+keywords = ["django", "utilities", "common", "sahimco"]
+authors = [
+    { name = "SahimCo", email = "sahimco.develop@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+]
+dependencies = [
+    "Django>=5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sahimco/sahim-django-common"
+Documentation = "https://github.com/sahimco/sahim-django-common#readme"
+Repository = "https://github.com/sahimco/sahim-django-common"
+"Bug Tracker" = "https://github.com/sahimco/sahim-django-common/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-django>=4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sahim_django_common*"]
