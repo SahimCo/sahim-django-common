@@ -60,10 +60,37 @@ This package provides reusable Django utilities used across SahimCo projects, su
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
+## 🔧 Development
+
+### Setup
+
+Install the package in editable mode with all dev and test dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+This installs the package (editable) plus pre-commit, pytest, and pytest-django.
+
+### Pre-commit
+
+This project uses [pre-commit](https://pre-commit.com/) for code quality checks:
+
+```bash
+# Install git hooks (run once)
+pre-commit install
+```
+
+Hooks run automatically on commit. To run manually:
+
+```bash
+pre-commit run --all-files
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome. Please open an issue or pull request on the [GitHub repository](https://github.com/sahimco/sahim-django-common).
 
----
+______________________________________________________________________
 
 **SahimCo** — [GitHub](https://github.com/sahimco) · [PyPI](https://pypi.org/project/sahim-django-common/)

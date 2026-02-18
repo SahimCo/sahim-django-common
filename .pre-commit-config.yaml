@@ -1,0 +1,97 @@
+# ============================================================
+# Pre-commit configuration for sahim-django-common
+# - Dev hooks: trailing whitespace, end-of-file fixer, formatters, linters
+# - Secret scanning (gitleaks) should run in CI only
+# ============================================================
+
+# Exclude build artifacts, virtual environments, docs, etc.
+exclude: |
+  (?x)^(
+      .*\{\{.*\}\}.*|
+      docs/site/.*|
+      \.history/.*|
+      .*cache.*/.*|
+      .*venv.*/.*|
+      build/.*|
+      dist/.*|
+      .*\.egg-info/.*
+  )$
+fail_fast: true
+repos:
+  # -----------------------------------------------------------
+  # Core pre-commit hooks
+  # -----------------------------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # Remove trailing spaces
+      - id: trailing-whitespace
+      # Ensure files end with a newline
+      - id: end-of-file-fixer
+      # Validate common formats
+      - id: check-json
+      - id: check-xml
+      - id: check-yaml
+      - id: check-toml
+      # Detect debug code
+      - id: debug-statements
+      # Check builtin literal usage
+      - id: check-builtin-literals
+      # Ensure no case-sensitive filename conflicts
+      - id: check-case-conflict
+      # Docstring first checks
+      - id: check-docstring-first
+      # Detect accidentally committed private keys
+      - id: detect-private-key
+      # Check for unresolved merge conflicts
+      - id: check-merge-conflict
+      # Warn on large added files (>5MB)
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
+      # Syntax tree checks
+      - id: check-ast
+      # Normalize line endings
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+  # -----------------------------------------------------------
+  # Pyproject validation
+  # -----------------------------------------------------------
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.23
+    hooks:
+      - id: validate-pyproject
+
+  # -----------------------------------------------------------
+  # Markdown formatting
+  # -----------------------------------------------------------
+  - repo: https://github.com/hukkin/mdformat
+    rev: 0.7.21
+    hooks:
+      - id: mdformat
+        additional_dependencies:
+          - mdformat-gfm
+
+  # -----------------------------------------------------------
+  # Ruff linter (Python/DRF)
+  # -----------------------------------------------------------
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args:
+          - --fix
+          - --exit-non-zero-on-fix
+      - id: ruff-format
+
+# ============================================================
+# Notes:
+# 1) gitleaks is intentionally removed from local pre-commit. It should run only in CI (GitHub Actions, GitLab CI, etc.)
+# 2) Contributor workflow: clone repo, create virtualenv, install pre-commit,
+#    then run hooks with `pre-commit run --all-files`
+# 3) CI workflow can have a separate gitleaks step:
+#      - name: Secret scanning
+#        uses: zricethezav/gitleaks-action@v2
+#        with:
+#          args: detect --source .
+# ============================================================

@@ -1,49 +1,142 @@
+# ============================================================
+# Build system configuration (PEP 517/518)
+# ============================================================
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+
+# ============================================================
+# Project metadata (PEP 621)
+# Information displayed on PyPI
+# ============================================================
 [project]
 name = "sahim-django-common"
 version = "0.1.0"
-description = "Django utilities and common components"
-readme = "README.md"
-license = "MIT"
+description = "Django utilities and common reusable components"
+
+# README shown on PyPI project page
+readme = { file = "README.md", content-type = "text/markdown" }
+
 requires-python = ">=3.10"
-keywords = ["django", "utilities", "common", "sahimco"]
+
+# License file (recommended for PyPI)
+license = { file = "LICENSE" }
+
+keywords = [
+    "django",
+    "utilities",
+    "common",
+    "reusable",
+    "sahimco",
+]
+
 authors = [
     { name = "SahimCo", email = "sahimco.develop@gmail.com" }
 ]
+
+# PyPI classifiers (important for discoverability)
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Web Environment",
+
+    # Django support
     "Framework :: Django",
     "Framework :: Django :: 5.0",
     "Framework :: Django :: 5.1",
+
     "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+
+    # Python versions
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+
     "Topic :: Internet :: WWW/HTTP",
 ]
+
+# Runtime dependencies
 dependencies = [
-    "Django>=5.0",
+    "Django>=5.0,<6.0",
 ]
 
+
+# ============================================================
+# Project links
+# ============================================================
 [project.urls]
 Homepage = "https://github.com/sahimco/sahim-django-common"
 Documentation = "https://github.com/sahimco/sahim-django-common#readme"
 Repository = "https://github.com/sahimco/sahim-django-common"
 "Bug Tracker" = "https://github.com/sahimco/sahim-django-common/issues"
 
+
+# ============================================================
+# Optional dependency groups
+# Install with:
+# pip install sahim-django-common[dev]
+# ============================================================
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0",
-    "pytest-django>=4.0",
+    "pre-commit>=4.0",
 ]
+
+test = [
+    "pytest",
+    "pytest-django",
+]
+
+
+# ============================================================
+# Setuptools configuration
+# ============================================================
+[tool.setuptools]
+include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["sahim_django_common*"]
+
+
+# ============================================================
+# Ruff configuration
+# Fast linter + formatter (replaces flake8, isort, black)
+# ============================================================
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+# Enabled rule groups:
+# E/W: pycodestyle
+# F: pyflakes
+# I: import sorting
+# N: pep8-naming
+# UP: pyupgrade
+# DJ: Django-specific rules
+select = ["E", "F", "I", "N", "W", "UP", "DJ"]
+
+ignore = []
+
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg-info",
+]
+
+
+# Ignore unused imports in package __init__ files
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+
+# Ruff formatter behavior
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
