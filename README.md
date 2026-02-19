@@ -87,6 +87,46 @@ Hooks run automatically on commit. To run manually:
 pre-commit run --all-files
 ```
 
+### Tests
+
+Run tests with pytest:
+
+```bash
+pytest
+```
+
+## 📤 Publishing releases (PyPI)
+
+Releases are published to PyPI automatically via GitHub Actions when you push a version tag.
+
+### One-time setup: Trusted Publishing on PyPI
+
+1. Log in to [PyPI](https://pypi.org) and open your project’s **Publishing** settings:
+   - `https://pypi.org/manage/project/sahim-django-common/settings/publishing/`
+1. Add a **Trusted Publisher** with:
+   - **Owner:** `sahimco` (or your GitHub org/user)
+   - **Repository name:** `sahim-django-common`
+   - **Workflow name:** `release.yml`
+   - **Environment name:** `pypi`
+1. Create a `pypi` environment in GitHub:
+   Repo → **Settings** → **Environments** → **New environment** → name it `pypi`
+   (Optional: enable **Required reviewers** for extra safety.)
+
+### Releasing a new version
+
+1. Bump version in `pyproject.toml`.
+
+1. Commit and push:
+
+   ```bash
+   git add pyproject.toml
+   git commit -m "Release v0.1.1"
+   git tag v0.1.1
+   git push origin main && git push origin v0.1.1
+   ```
+
+1. The workflow runs automatically and publishes to PyPI.
+
 ## 🤝 Contributing
 
 Contributions are welcome. Please open an issue or pull request on the [GitHub repository](https://github.com/sahimco/sahim-django-common).

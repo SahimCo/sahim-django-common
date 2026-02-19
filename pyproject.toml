@@ -140,3 +140,10 @@ exclude = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+
+# ============================================================
+# Pytest configuration
+# ============================================================
+[tool.pytest.ini_options]
+testpaths = ["tests"]
