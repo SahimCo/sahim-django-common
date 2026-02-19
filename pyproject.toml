@@ -12,7 +12,7 @@ build-backend = "setuptools.build_meta"
 # ============================================================
 [project]
 name = "sahim-django-common"
-version = "0.1.0"
+version = "0.1.2"
 description = "Django utilities and common reusable components"
 
 # README shown on PyPI project page
