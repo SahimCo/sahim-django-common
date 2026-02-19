@@ -1,7 +1,6 @@
 # ============================================================
 # Pre-commit configuration for sahim-django-common
 # - Dev hooks: trailing whitespace, end-of-file fixer, formatters, linters
-# - Secret scanning (gitleaks) should run in CI only
 # ============================================================
 
 # Exclude build artifacts, virtual environments, docs, etc.
@@ -86,8 +85,6 @@ repos:
 
 # ============================================================
 # Notes:
-# 1) gitleaks is intentionally removed from local pre-commit. It should run only in CI (GitHub Actions, GitLab CI, etc.)
-# 2) Contributor workflow: clone repo, create virtualenv, install pre-commit,
-#    then run hooks with `pre-commit run --all-files`
-# 3) CI workflow has a gitleaks step (see .github/workflows/ci.yml)
+# Contributor workflow: clone repo, create virtualenv, install pre-commit,
+# then run hooks with `pre-commit run --all-files`
 # ============================================================

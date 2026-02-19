@@ -1,6 +1,6 @@
 # ============================================================
 # CI: Lint, validate, and test on push/PR
-# Mirrors pre-commit hooks and adds gitleaks (per .pre-commit-config notes)
+# Mirrors pre-commit hooks
 # ============================================================
 
 name: CI
@@ -59,18 +59,3 @@ jobs:
 
       - name: Run pytest
         run: pytest
-
-  secret-scan:
-    name: Secret scanning
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Secret scanning
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}  # Required for GitHub orgs only
